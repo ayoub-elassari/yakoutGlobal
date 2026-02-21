@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YakoutGlobal – دراسة وهجرة</title>
+    <!-- Tailwind (RTL) & Font Awesome -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Tajawal", sans-serif;
+      }
+      @import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap");
+      .gradient-bg {
+        background: linear-gradient(145deg, #f9fafb 0%, #ffffff 100%);
+      }
+      .card-hover:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 30px -10px rgba(0, 100, 80, 0.2);
+        transition: all 0.3s ease;
+      }
+      /* تنسيق حقل الإحداثيات لسهولة النسخ */
+      .coord-copy {
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .coord-copy:hover {
+        background-color: #e6f7f0;
+      }
+      /* تنسيق بطاقة الخريطة */
+      .map-card {
+        transition: all 0.3s ease;
+      }
+      .map-card:hover {
+        transform: scale(1.02);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-800 antialiased">
+    <!-- header / شريط العنوان – الاسم الجديد -->
+    <header
+      class="bg-white shadow-sm sticky top-0 z-30 border-b border-gray-100"
+    >
+      <div
+        class="container mx-auto px-6 py-4 flex flex-wrap items-center justify-between"
+      >
+        <div class="flex items-center space-x-3 space-x-reverse">
+          <i class="fas fa-globe-africa text-3xl text-emerald-600"></i>
+          <span class="text-2xl font-bold text-gray-800 tracking-tight"
+            >Yakout<span class="text-emerald-600">Global</span></span
+          >
+        </div>
+        <nav
+          class="hidden md:flex space-x-6 space-x-reverse text-gray-600 font-medium"
+        >
+          <a href="#german" class="hover:text-emerald-600 transition"
+            >الخدمات الألمانية</a
+          >
+          <a href="#italy" class="hover:text-emerald-600 transition">إيطاليا</a>
+          <a href="#china" class="hover:text-emerald-600 transition">الصين</a>
+          <a href="#russia" class="hover:text-emerald-600 transition">روسيا</a>
+          <a href="#contact" class="hover:text-emerald-600 transition"
+            >اتصل بنا</a
+          >
+        </nav>
+        <div class="flex gap-2">
+          <a
+            href="#contact"
+            class="bg-emerald-50 text-emerald-700 px-5 py-2 rounded-full text-sm font-semibold hover:bg-emerald-100 transition flex items-center gap-2"
+            ><i class="fas fa-phone-alt"></i> واتساب</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <!-- قسم ترحيبي -->
+    <section class="gradient-bg py-12 border-b border-gray-100">
+      <div class="container mx-auto px-6 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+          YakoutGlobal – وجهتك نحو
+          <span class="text-emerald-600">مستقبل احترافي</span>
+        </h1>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          مرافقة كاملة من تعلم اللغة إلى التأشيرة والتدريب المهني – ألمانيا،
+          إيطاليا، الصين، روسيا.
+        </p>
+      </div>
+    </section>
+
+    <!-- ألمانيا (الخدمات الألمانية) -->
+    <section id="german" class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="flex items-center gap-3 mb-10">
+          <i class="fas fa-flag fa-2x text-amber-400"></i>
+          <h2 class="text-3xl font-bold text-gray-800">
+            الخدمات الألمانية
+            <span class="text-amber-600">(أوسبيلدونغ & وظائف)</span>
+          </h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- card 1 -->
+          <div
+            class="bg-gray-50 rounded-3xl p-6 shadow-md border border-gray-100 card-hover"
+          >
+            <i class="fas fa-language text-4xl text-amber-600 mb-4"></i>
+            <h3 class="text-xl font-semibold mb-3">دورات لغة ألمانية</h3>
+            <p class="text-gray-600">
+              مستويات A1 إلى B2 مع مدرسين معتمدين، تحضير لامتحانات Goethe و
+              TELC.
+            </p>
+          </div>
+          <!-- card 2 -->
+          <div
+            class="bg-gray-50 rounded-3xl p-6 shadow-md border border-gray-100 card-hover"
+          >
+            <i class="fas fa-briefcase text-4xl text-amber-600 mb-4"></i>
+            <h3 class="text-xl font-semibold mb-3">تدريب مهني (Ausbildung)</h3>
+            <p class="text-gray-600">
+              نساعدك في إيجاد مكان تدريب مناسب ونساندك في إجراءات التعاقد مع
+              المشغل الألماني.
+            </p>
+          </div>
+          <!-- card 3 -->
+          <div
+            class="bg-gray-50 rounded-3xl p-6 shadow-md border border-gray-100 card-hover"
+          >
+            <i class="fas fa-file-signature text-4xl text-amber-600 mb-4"></i>
+            <h3 class="text-xl font-semibold mb-3">
+              ترجمة المستندات و التأشيرة
+            </h3>
+            <p class="text-gray-600">
+              ترجمة رسمية باللغة الألمانية لكافة الأوراق، متابعة ملف الفيزا حتى
+              الوصول.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- إيطاليا - الصين - روسيا -->
+    <!-- إيطاليا -->
+    <section id="italy" class="py-12 bg-white border-t border-gray-100">
+      <div class="container mx-auto px-6">
+        <div class="flex items-center gap-3 mb-8">
+          <i class="fas fa-flag-checkered fa-2x text-green-600"></i>
+          <h2 class="text-3xl font-bold text-gray-800">
+            إيطاليا <span class="text-green-600">(دراسة & تدريب)</span>
+          </h2>
+        </div>
+        <div
+          class="bg-gradient-to-l from-green-50 to-white p-8 rounded-3xl border border-green-100 flex flex-wrap items-center justify-between gap-6"
+        >
+          <div class="max-w-2xl">
+            <p class="text-lg text-gray-700 leading-relaxed">
+              <i class="fas fa-graduation-cap ml-2 text-green-600"></i> فريق
+              متخصص لدراسة الطب والهندسة والفنون في إيطاليا. نوفر القبول
+              الجامعي، ونساعد في إجراءات التأشيرة والإقامة. دورات لغة إيطالية
+              للمبتدئين.
+            </p>
+            <div class="flex gap-4 mt-6">
+              <span
+                class="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm"
+                ><i class="fas fa-check-circle ml-1"></i> قبول جامعي</span
+              >
+              <span
+                class="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm"
+                ><i class="fas fa-check-circle ml-1"></i> تأشيرة دراسة</span
+              >
+            </div>
+          </div>
+          <i
+            class="fas fa-italy fa-4x text-green-300 opacity-60 hidden md:block"
+          ></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- الصين -->
+    <section id="china" class="py-12 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <div class="flex items-center gap-3 mb-8">
+          <i class="fas fa-dragon fa-2x text-red-500"></i>
+          <h2 class="text-3xl font-bold text-gray-800">
+            الصين <span class="text-red-500">(الدراسة بالخارج)</span>
+          </h2>
+        </div>
+        <div
+          class="bg-gradient-to-l from-red-50 to-white p-8 rounded-3xl border border-red-100 flex flex-wrap items-center justify-between gap-6"
+        >
+          <div class="max-w-2xl">
+            <p class="text-lg text-gray-700 leading-relaxed">
+              <i class="fas fa-university ml-2 text-red-500"></i> فريق متكامل
+              للراغبين في إكمال مسارهم الأكاديمي في الصين (بكالوريوس، ماجستير،
+              منح). نرافقك في اختيار التخصص و التقديم على المنح الحكومية.
+            </p>
+            <div class="flex gap-4 mt-6">
+              <span
+                class="bg-red-100 text-red-800 px-4 py-2 rounded-full text-sm"
+                ><i class="fas fa-language ml-1"></i> دورات صينية</span
+              >
+              <span
+                class="bg-red-100 text-red-800 px-4 py-2 rounded-full text-sm"
+                ><i class="fas fa-hand-holding-usd ml-1"></i> منح جزئية</span
+              >
+            </div>
+          </div>
+          <i
+            class="fas fa-china fa-4x text-red-300 opacity-60 hidden md:block"
+          ></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- روسيا -->
+    <section id="russia" class="py-12 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="flex items-center gap-3 mb-8">
+          <i class="fas fa-snowman fa-2x text-indigo-400"></i>
+          <h2 class="text-3xl font-bold text-gray-800">
+            روسيا <span class="text-indigo-500">(طب – هندسة – علوم)</span>
+          </h2>
+        </div>
+        <div
+          class="bg-gradient-to-l from-indigo-50 to-white p-8 rounded-3xl border border-indigo-100 flex flex-wrap items-center justify-between gap-6"
+        >
+          <div class="max-w-2xl">
+            <p class="text-lg text-gray-700 leading-relaxed">
+              <i class="fas fa-flask ml-2 text-indigo-500"></i> فرص الدراسة في
+              روسيا بأسعار تنافسية. فريقنا يتابع ملفات التقديم للجامعات الروسية،
+              ويساعد في استخراج الدعوة والتأشيرة، والإقامة.
+            </p>
+            <div class="flex gap-4 mt-6 flex-wrap">
+              <span
+                class="bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full text-sm"
+                ><i class="fas fa-file-contract ml-1"></i> دعوة دراسية</span
+              >
+              <span
+                class="bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full text-sm"
+                ><i class="fas fa-plane-arrival ml-1"></i> استقبال في
+                المطار</span
+              >
+            </div>
+          </div>
+          <i
+            class="fas fa-ruble-sign fa-4x text-indigo-300 opacity-60 hidden md:block"
+          ></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- قسم المميزات الإضافية -->
+    <section class="py-12 bg-emerald-50 border-t border-emerald-100">
+      <div class="container mx-auto px-6 grid md:grid-cols-3 gap-6 text-center">
+        <div>
+          <i class="fas fa-headset text-4xl text-emerald-600 mb-3"></i>
+          <h4 class="font-bold text-lg mb-1">استشارة مجانية</h4>
+          <p class="text-gray-600">نحدد معك المسار الأنسب حسب مؤهلاتك.</p>
+        </div>
+        <div>
+          <i class="fas fa-file-signature text-4xl text-emerald-600 mb-3"></i>
+          <h4 class="font-bold text-lg mb-1">توثيق وترجمة احترافية</h4>
+          <p class="text-gray-600">
+            ترجمة كافة الوثائق بالألمانية، الإنجليزية، الروسية.
+          </p>
+        </div>
+        <div>
+          <i class="fas fa-users text-4xl text-emerald-600 mb-3"></i>
+          <h4 class="font-bold text-lg mb-1">فرق ميدانية</h4>
+          <p class="text-gray-600">
+            لنا ممثلون في إيطاليا، الصين، روسيا وألمانيا.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- نموذج الاتصال، واتساب، الخريطة مع إحداثي النخيل -->
+    <section id="contact" class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold text-gray-800 mb-2">
+            تواصل مع YakoutGlobal
+          </h2>
+          <p class="text-gray-500">اترك رسالة أو راسلنا مباشرة عبر واتساب .</p>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-12 items-start">
+          <!-- form -->
+          <div
+            class="bg-gray-50 rounded-3xl p-8 shadow-md border border-gray-200"
+          >
+            <form action="#" method="post">
+              <div class="mb-5">
+                <label class="block text-gray-700 font-medium mb-2"
+                  >الاسم الكامل</label
+                >
+                <input
+                  type="text"
+                  placeholder="مثال: أحمد العلوي"
+                  class="w-full p-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-emerald-300 outline-none"
+                />
+              </div>
+              <div class="mb-5">
+                <label class="block text-gray-700 font-medium mb-2"
+                  >البريد الإلكتروني</label
+                >
+                <input
+                  type="email"
+                  placeholder="ahmed@example.com"
+                  class="w-full p-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-emerald-300 outline-none"
+                />
+              </div>
+              <div class="mb-5">
+                <label class="block text-gray-700 font-medium mb-2"
+                  >رقم الهاتف (واتساب)</label
+                >
+                <input
+                  type="tel"
+                  placeholder="+212 XXX-XXXXXX"
+                  class="w-full p-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-emerald-300 outline-none"
+                />
+              </div>
+              <div class="mb-5">
+                <label class="block text-gray-700 font-medium mb-2"
+                  >الخدمة المطلوبة</label
+                >
+                <select
+                  class="w-full p-3 border border-gray-300 rounded-2xl bg-white"
+                >
+                  <option>ألمانيا (لغة / أوسبيلدونغ)</option>
+                  <option>إيطاليا (دراسة)</option>
+                  <option>الصين (دراسة / منح)</option>
+                  <option>روسيا (دراسة)</option>
+                  <option>أخرى</option>
+                </select>
+              </div>
+              <div class="mb-5">
+                <label class="block text-gray-700 font-medium mb-2"
+                  >رسالتك</label
+                >
+                <textarea
+                  rows="4"
+                  placeholder="اكتب استفسارك هنا ..."
+                  class="w-full p-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-emerald-300 outline-none"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-8 rounded-2xl transition w-full text-lg"
+              >
+                إرسال <i class="fas fa-paper-plane mr-2"></i>
+              </button>
+            </form>
+          </div>
+          <!-- location + whatsapp + تفاصيل مع إحداثي النخيل -->
+          <div class="space-y-8">
+            <!-- واتساب و اتصال سريع -->
+            <div
+              class="bg-gradient-to-r from-emerald-600 to-emerald-500 text-white p-8 rounded-3xl shadow-lg"
+            >
+              <div class="flex items-center gap-4 mb-4">
+                <i class="fab fa-whatsapp text-5xl"></i>
+                <div>
+                  <h3 class="text-2xl font-bold">واتساب مباشر</h3>
+                  <p class="opacity-90">أرسل لنا أي استفسار وسنرد فوراً</p>
+                </div>
+              </div>
+              <a
+                href="https://wa.me/212600000000"
+                target="_blank"
+                class="block bg-white text-emerald-700 text-center font-bold py-3 rounded-2xl text-lg hover:bg-gray-100 transition"
+                >+212 600-000000 <i class="fab fa-whatsapp mr-2"></i
+              ></a>
+              <div class="mt-4 flex justify-center gap-6">
+                <span><i class="fas fa-phone-alt ml-1"></i> 0522-123456</span>
+                <span
+                  ><i class="fas fa-envelope ml-1"></i>
+                  contact@yakoutglobal.ma</span
+                >
+              </div>
+            </div>
+            <!-- localisation مع إحداثي النخيل (Palmier, Casablanca) -->
+            <div class="bg-gray-100 rounded-3xl p-5 border border-gray-200">
+              <h4 class="text-xl font-bold mb-3 flex items-center gap-2">
+                <i class="fas fa-map-pin text-red-500"></i> موقعنا – النخيل،
+                الدار البيضاء
+              </h4>
+              <div
+                class="bg-white p-4 rounded-2xl flex flex-col gap-2 text-gray-700"
+              >
+                <div class="flex items-center gap-3">
+                  <i
+                    class="fas fa-map-marked-alt text-2xl text-emerald-600"
+                  ></i>
+                  <span>حي النخيل، الدار البيضاء 20250، المغرب</span>
+                </div>
+                <!-- حاوية الإحداثيات الدقيقة للنخيل مع خاصية النسخ -->
+                <div
+                  class="mt-2 flex items-center justify-between bg-gray-100 p-2 rounded-xl coord-copy"
+                  onclick="copyCoordinates()"
+                  title="انقر لنسخ الإحداثيات"
+                >
+                  <span dir="ltr" class="text-sm font-mono text-gray-800"
+                    >33.58225° N, 7.62905° W</span
+                  >
+                  <i class="fas fa-copy text-emerald-600"></i>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">
+                  (انقر على الإحداثي لنسخه)
+                </p>
+              </div>
+
+              <!-- بطاقة خريطة بديلة - رابط مباشر لخرائط جوجل (بدون صورة ثابتة) -->
+              <a
+                href="https://www.google.com/maps/place/Palmier,+Casablanca/@33.5822528,-7.6290453,17z"
+                target="_blank"
+                class="block mt-4"
+              >
+                <div
+                  class="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-5 text-center map-card hover:shadow-lg"
+                >
+                  <div class="flex flex-col items-center gap-3">
+                    <div class="bg-emerald-100 p-4 rounded-full">
+                      <i
+                        class="fas fa-map-marked-alt text-3xl text-emerald-600"
+                      ></i>
+                    </div>
+                    <h5 class="font-bold text-lg text-gray-800">
+                      افتح الخريطة التفاعلية
+                    </h5>
+                    <p class="text-sm text-gray-600">
+                      اضغط هنا لفتح موقع النخيل في خرائط جوجل
+                    </p>
+                    <div
+                      class="bg-emerald-600 text-white px-6 py-2 rounded-full text-sm font-semibold mt-2"
+                    >
+                      <i class="fas fa-external-link-alt ml-1"></i> فتح في خرائط
+                      جوجل
+                    </div>
+                    <div
+                      class="text-xs text-gray-500 mt-2 flex items-center gap-2"
+                    >
+                      <i class="fas fa-map-pin text-red-500"></i>
+                      <span dir="ltr">33.5822528, -7.6290453</span>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <p class="text-sm text-gray-500 mt-3 flex items-center gap-1">
+                <i class="fas fa-info-circle text-emerald-500"></i> الموقع: حي
+                النخيل، الدار البيضاء (قابل للنقر لفتح الخريطة)
+              </p>
+            </div>
+            <!-- ساعات العمل -->
+            <div class="bg-amber-50 p-5 rounded-3xl flex items-center gap-4">
+              <i class="fas fa-clock text-3xl text-amber-600"></i>
+              <div>
+                <strong>الإثنين - الجمعة:</strong> 9:00 – 19:00<br />
+                <strong>السبت:</strong> 10:00 – 15:00
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- فوتر مع اسم جديد -->
+    <footer class="bg-gray-900 text-gray-300 py-10">
+      <div class="container mx-auto px-6 grid md:grid-cols-3 gap-8">
+        <div>
+          <div
+            class="flex items-center gap-2 text-white text-2xl font-bold mb-3"
+          >
+            <i class="fas fa-globe"></i> YakoutGlobal
+          </div>
+          <p class="text-sm">
+            منذ 2015، نفتح آفاق الدراسة والعمل لشباب المغرب في أهم الوجهات:
+            ألمانيا، إيطاليا، الصين، روسيا.
+          </p>
+        </div>
+        <div>
+          <h5 class="text-white font-bold mb-3">روابط سريعة</h5>
+          <ul class="space-y-2">
+            <li>
+              <a href="#german" class="hover:text-emerald-300 transition"
+                >ألمانيا</a
+              >
+            </li>
+            <li>
+              <a href="#italy" class="hover:text-emerald-300 transition"
+                >إيطاليا</a
+              >
+            </li>
+            <li>
+              <a href="#china" class="hover:text-emerald-300 transition"
+                >الصين</a
+              >
+            </li>
+            <li>
+              <a href="#russia" class="hover:text-emerald-300 transition"
+                >روسيا</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="text-white font-bold mb-3">تواصل</h5>
+          <div>
+            <i class="fab fa-whatsapp ml-2 text-emerald-400"></i> +212
+            600-000000
+          </div>
+          <div><i class="fas fa-phone ml-2"></i> 0522-123456</div>
+          <div>
+            <i class="fas fa-envelope ml-2"></i> contact@yakoutglobal.ma
+          </div>
+        </div>
+      </div>
+      <div
+        class="border-t border-gray-800 mt-8 pt-5 text-center text-sm text-gray-500"
+      >
+        © 2025 YakoutGlobal – جميع الحقوق محفوظة.
+      </div>
+    </footer>
+
+    <!-- زر واتساب عائم -->
+    <a
+      href="https://wa.me/212600000000"
+      target="_blank"
+      class="fixed bottom-6 left-6 bg-green-500 text-white p-4 rounded-full shadow-xl hover:bg-green-600 transition z-50 flex items-center gap-2 text-lg font-semibold"
+    >
+      <i class="fab fa-whatsapp text-2xl"></i>
+      <span class="hidden sm:inline">تواصل واتساب</span>
+    </a>
+
+    <!-- جافاسكربت لنسخ إحداثيات النخيل إلى الحافظة -->
+    <script>
+      function copyCoordinates() {
+        const numericCoords = "33.5822528, -7.6290453";
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard
+            .writeText(numericCoords)
+            .then(() => {
+              alert(
+                "تم نسخ الإحداثيات: " +
+                  numericCoords +
+                  " (النخيل، الدار البيضاء) يمكنك لصقها في خرائط جوجل.",
+              );
+            })
+            .catch(() => {
+              prompt("انسخ الإحداثيات يدويًا:", numericCoords);
+            });
+        } else {
+          prompt("انسخ الإحداثيات:", numericCoords);
+        }
+      }
+    </script>
+  </body>
+</html>
