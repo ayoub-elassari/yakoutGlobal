@@ -1,0 +1,993 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LinguaBridge | تعلم الألمانية والوصول للوظيفة</title>
+    <!-- Font Awesome 6 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <!-- Google Fonts Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Animate on Scroll library (AOS) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Cairo", sans-serif;
+      }
+      body {
+        /* لون خلفية أساسي جديد - أزرق داكن مخضر */
+        background: #0a1922;
+        color: #e6f0fa;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      .container {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 2rem 5%;
+      }
+
+      /* ==========  شريط التنقل ========== */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.2rem 5%;
+        background: rgba(7, 28, 36, 0.85); /* أعمق */
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(64, 224, 208, 0.3); /* تركواز */
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        animation: slideDown 0.8s ease;
+      }
+      @keyframes slideDown {
+        0% {
+          transform: translateY(-100%);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .logo {
+        font-size: 2rem;
+        font-weight: 800;
+        /* تدرج جديد من النعناعي للتركواز */
+        background: linear-gradient(130deg, #64ffda, #48cae4);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        letter-spacing: -0.5px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .logo span {
+        color: #ffffff;
+        background: none;
+        -webkit-background-clip: unset;
+        background-clip: unset;
+        font-weight: 400;
+        font-size: 1.4rem;
+      }
+      .logo i {
+        color: #80ffdb; /* نعناعي فاتح */
+        font-size: 2rem;
+        background: none;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        align-items: center;
+      }
+      .nav-links a {
+        color: #caf0f8;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.1rem;
+        transition: 0.2s;
+        border-bottom: 2px solid transparent;
+        padding-bottom: 4px;
+      }
+      .nav-links a:hover {
+        border-bottom-color: #64ffda; /* نعناعي */
+        color: #80ffdb;
+      }
+      .btn-outline {
+        border: 1.5px solid #64ffda;
+        border-radius: 40px;
+        padding: 0.5rem 1.8rem !important;
+        background: transparent;
+        transition: 0.3s;
+      }
+      .btn-outline:hover {
+        background: #64ffda;
+        color: #0a1922 !important;
+        border-color: #64ffda;
+      }
+
+      /* ==========  قسم الهيرو ========== */
+      .hero {
+        min-height: 90vh;
+        display: flex;
+        align-items: center;
+        background: url("https://images.unsplash.com/photo-1467269204594-9661b134dd2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80")
+          center/cover no-repeat;
+        background-blend-mode: overlay;
+        background-color: #0a1922cc;
+        position: relative;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          circle at 20% 30%,
+          rgba(0, 80, 100, 0.7),
+          rgba(2, 30, 40, 0.95)
+        );
+        pointer-events: none;
+      }
+      .hero .container {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 3rem;
+      }
+      .hero-content {
+        flex: 1 1 400px;
+        animation: fadeInUp 1s ease;
+      }
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .hero-content h1 {
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        font-weight: 800;
+        line-height: 1.2;
+        background: linear-gradient(to left, #ffffff, #a5f0e6);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 1rem;
+      }
+      .hero-content p {
+        font-size: 1.3rem;
+        color: #b6e6f0;
+        max-width: 600px;
+        margin: 1.5rem 0;
+      }
+      .hero-stats {
+        display: flex;
+        gap: 2rem;
+        margin: 2rem 0;
+      }
+      .stat-item h3 {
+        font-size: 2rem;
+        color: #64ffda; /* نعناعي */
+      }
+      .btn-group {
+        display: flex;
+        gap: 1.2rem;
+        flex-wrap: wrap;
+      }
+      .btn-primary {
+        background: #64ffda;
+        color: #0a1922;
+        font-weight: 600;
+        padding: 0.9rem 2.5rem;
+        border-radius: 60px;
+        text-decoration: none;
+        box-shadow: 0 8px 20px rgba(100, 255, 218, 0.3);
+        transition: 0.2s;
+        border: none;
+        font-size: 1.1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .btn-primary:hover {
+        background: #96ffe8;
+        transform: scale(1.03);
+        box-shadow: 0 12px 28px rgba(100, 255, 218, 0.5);
+      }
+      .btn-secondary {
+        background: transparent;
+        border: 1.5px solid #caf0f8;
+        color: #caf0f8;
+        font-weight: 500;
+        padding: 0.9rem 2.5rem;
+        border-radius: 60px;
+        text-decoration: none;
+        backdrop-filter: blur(4px);
+        transition: 0.2s;
+      }
+      .btn-secondary:hover {
+        background: rgba(100, 255, 218, 0.15);
+        border-color: #64ffda;
+      }
+      .hero-image {
+        flex: 1 1 300px;
+        text-align: center;
+        animation: float 4s ease-in-out infinite;
+      }
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+      .hero-image img {
+        max-width: 100%;
+        filter: drop-shadow(0 20px 20px #00000060);
+        border-radius: 30px;
+        max-height: 400px;
+        width: auto;
+      }
+
+      /* ==========  الخلفيات المتدرجة الجديدة ========== */
+      .gradient-bg {
+        background: linear-gradient(
+          145deg,
+          #0e2a34 0%,
+          #1b3b48 50%,
+          #0f2c38 100%
+        );
+        background-size: 200% 200%;
+        animation: gradientFlow 18s ease infinite;
+      }
+      @keyframes gradientFlow {
+        0% {
+          background-position: 0% 0%;
+        }
+        50% {
+          background-position: 100% 100%;
+        }
+        100% {
+          background-position: 0% 0%;
+        }
+      }
+
+      /* ==========  العناوين ========== */
+      .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        background: linear-gradient(130deg, #ffffff, #80ffdb);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-align: center;
+      }
+      .section-sub {
+        color: #b0e0e6;
+        max-width: 700px;
+        margin: 0 auto 3rem auto;
+        font-size: 1.2rem;
+        text-align: center;
+      }
+
+      /* ==========  بطاقات الخدمات ========== */
+      .service-block {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 3rem;
+        margin-bottom: 6rem;
+      }
+      .service-block.reverse {
+        flex-direction: row-reverse;
+      }
+      .block-image {
+        flex: 1 1 300px;
+        border-radius: 40px;
+        overflow: hidden;
+        box-shadow: 0 30px 40px -10px black;
+        transition:
+          transform 0.5s ease,
+          box-shadow 0.4s;
+        aspect-ratio: 4/3;
+      }
+      .block-image:hover {
+        transform: scale(1.02) translateY(-8px);
+        box-shadow: 0 40px 50px -5px #000000cc;
+      }
+      .block-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.6s;
+      }
+      .block-image:hover img {
+        transform: scale(1.07);
+      }
+      .block-content {
+        flex: 1 1 300px;
+        background: rgba(10, 40, 50, 0.6);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(100, 255, 218, 0.25);
+        border-radius: 50px;
+        padding: 2.5rem;
+        transition: 0.3s;
+        box-shadow: 0 20px 30px -10px black;
+      }
+      .block-content:hover {
+        border-color: #64ffda90;
+        background: rgba(20, 60, 75, 0.7);
+      }
+      .service-icon {
+        font-size: 3.2rem;
+        color: #64ffda;
+        margin-bottom: 1.2rem;
+      }
+      .block-content h3 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: #a5f0e6;
+      }
+      .block-content p {
+        color: #d0f0f5;
+        font-size: 1.15rem;
+        margin-bottom: 1.5rem;
+      }
+      .feature-tag {
+        display: inline-block;
+        background: rgba(100, 255, 218, 0.1);
+        border: 1px solid #64ffda60;
+        border-radius: 60px;
+        padding: 0.3rem 1.2rem;
+        margin-left: 0.5rem;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        transition: 0.2s;
+      }
+      .feature-tag:hover {
+        background: #64ffda30;
+        border-color: #64ffda;
+      }
+
+      @media (max-width: 800px) {
+        .service-block,
+        .service-block.reverse {
+          flex-direction: column;
+        }
+        .block-content {
+          padding: 1.8rem;
+        }
+      }
+
+      /* ==========  قسم من نحن ========== */
+      .about-section {
+        background:
+          linear-gradient(90deg, #0e2a34, #1a4858),
+          url("https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1771&q=80")
+            left/cover no-repeat;
+        background-blend-mode: overlay;
+        background-attachment: fixed;
+        padding: 5rem 0;
+      }
+      .about-grid {
+        display: flex;
+        gap: 3rem;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .about-text {
+        flex: 1 1 300px;
+        background: rgba(7, 28, 36, 0.5);
+        backdrop-filter: blur(6px);
+        border-radius: 40px;
+        padding: 2rem;
+        border-right: 6px solid #64ffda;
+      }
+      .about-text h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1.2rem;
+      }
+      .feature-list {
+        list-style: none;
+        margin-top: 2rem;
+      }
+      .feature-list li {
+        margin: 0.8rem 0;
+        font-size: 1.2rem;
+      }
+      .feature-list i {
+        color: #64ffda;
+        margin-left: 0.8rem;
+      }
+      .about-image {
+        flex: 1 1 300px;
+        border-radius: 40px;
+        overflow: hidden;
+        box-shadow: 0 30px 40px -10px black;
+        transition: transform 0.4s;
+      }
+      .about-image:hover {
+        transform: scale(1.02);
+      }
+      .about-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* ==========  خطوات العملية ========== */
+      .process-steps {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+        margin: 3rem 0;
+      }
+      .step {
+        background: rgba(10, 40, 50, 0.3);
+        backdrop-filter: blur(4px);
+        border: 1px solid rgba(100, 255, 218, 0.2);
+        border-radius: 50px;
+        padding: 1.5rem 2rem;
+        flex: 1 1 160px;
+        text-align: center;
+        transition: 0.3s;
+      }
+      .step:hover {
+        background: rgba(100, 255, 218, 0.1);
+        border-color: #64ffda;
+      }
+      .step .step-num {
+        background: #64ffda;
+        color: #0a1922;
+        width: 50px;
+        height: 50px;
+        border-radius: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 1.8rem;
+        margin: 0 auto 1rem;
+      }
+
+      /* ==========  شهادة + تذييل ========== */
+      .testimonial-block {
+        background: url("https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1674&q=80")
+          center/cover fixed;
+        position: relative;
+        padding: 6rem 0;
+      }
+      .testimonial-block::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(10, 40, 50, 0.85);
+        backdrop-filter: blur(3px);
+      }
+      .testimonial-content {
+        position: relative;
+        z-index: 2;
+        max-width: 900px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .quote {
+        font-size: 1.8rem;
+        font-style: italic;
+        color: #f0fafc;
+      }
+      .author {
+        margin-top: 2rem;
+        font-weight: 600;
+        color: #64ffda;
+      }
+      footer {
+        background: #0a1c24;
+        border-top: 1px solid #2a5f6e;
+        padding: 3rem 5% 1.5rem;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 2rem;
+      }
+      .footer-col p {
+        color: #9fcbd3;
+      }
+      .social-icons i {
+        font-size: 1.8rem;
+        margin-left: 1rem;
+        color: #90e0e0;
+        transition: 0.2s;
+      }
+      .social-icons i:hover {
+        color: #64ffda;
+        transform: translateY(-3px);
+      }
+      .copyright {
+        text-align: center;
+        margin-top: 4rem;
+        color: #6a9faa;
+      }
+
+      /* AOS compatibility */
+      [data-aos] {
+        pointer-events: all;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- شريط التنقل (بنفس البنية لكن الألوان تغيرت) -->
+    <nav class="navbar">
+      <div class="logo">
+        <i class="fas fa-flag-checkered"></i> Lingua<span>Bridge</span>
+      </div>
+      <div class="nav-links">
+        <a href="#home">الرئيسية</a>
+        <a href="#services">خدماتنا</a>
+        <a href="#about">من نحن</a>
+        <a href="#prozess">الخطوات</a>
+        <a href="#kontakt" class="btn-outline">اتصل بنا</a>
+      </div>
+    </nav>
+
+    <!-- هيرو -->
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="hero-content" data-aos="fade-left" data-aos-duration="1000">
+          <h1>إتقان اللغة الألمانية، تدريب مهني، وظيفة في ألمانيا</h1>
+          <p>
+            طريقك إلى المستقبل في ألمانيا – معهد لغوي مع دعم متكامل: تحضير
+            للامتحانات، تأشيرة، توفير فرص تدريب وتوظيف.
+          </p>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <h3>%98</h3>
+              <span>نسبة نجاح</span>
+            </div>
+            <div class="stat-item">
+              <h3>+15</h3>
+              <span>شركة شريكة</span>
+            </div>
+          </div>
+          <div class="btn-group">
+            <a href="#kontakt" class="btn-primary"
+              ><i class="fas fa-arrow-left"></i> استشارة مجانية</a
+            >
+            <a href="#services" class="btn-secondary">دوراتنا</a>
+          </div>
+        </div>
+        <div class="hero-image" data-aos="fade-right" data-aos-duration="1000">
+          <img
+            src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80"
+            alt="طالب مع العلم الألماني"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- عنوان الخدمات -->
+    <section id="services" class="gradient-bg" style="padding: 3rem 0 1rem 0">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">
+          حلول شاملة من مكان واحد
+        </h2>
+        <p class="section-sub" data-aos="fade-up" data-aos-delay="100">
+          تعليم اللغة + المعاملات الرسمية + المسار المهني – نرافقك من أول كلمة
+          ألمانية حتى عقد العمل.
+        </p>
+      </div>
+    </section>
+
+    <!-- خدمة 1: دورات اللغة -->
+    <section class="gradient-bg" style="padding: 0 0 2rem 0">
+      <div class="container">
+        <div class="service-block" data-aos="fade-up" data-aos-duration="800">
+          <div
+            class="block-image"
+            data-aos="zoom-in-right"
+            data-aos-delay="150"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80"
+              alt="دورة لغة ألمانية"
+            />
+          </div>
+          <div class="block-content" data-aos="fade-right" data-aos-delay="200">
+            <div class="service-icon"><i class="fas fa-language"></i></div>
+            <h3>دورات اللغة</h3>
+            <p>
+              من المستوى المبتدئ إلى الاحترافي، نقدم برامج مكثفة ومرنة تناسب
+              جدولك. دروس تفاعلية حية ومتوفرة مسائية وأسبوعية.
+            </p>
+            <div>
+              <span class="feature-tag">A1 - C2</span>
+              <span class="feature-tag">تحضير Goethe</span>
+              <span class="feature-tag">Telc</span>
+              <span class="feature-tag">مجموعات صغيرة</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- خدمة 2: تحضير الامتحانات -->
+    <section class="gradient-bg" style="padding: 0 0 2rem 0">
+      <div class="container">
+        <div
+          class="service-block reverse"
+          data-aos="fade-up"
+          data-aos-duration="800"
+        >
+          <div class="block-image" data-aos="zoom-in-left" data-aos-delay="150">
+            <img
+              src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80"
+              alt="امتحان شهادة لغة"
+            />
+          </div>
+          <div class="block-content" data-aos="fade-left" data-aos-delay="200">
+            <div class="service-icon"><i class="fas fa-certificate"></i></div>
+            <h3>تحضير الامتحانات</h3>
+            <p>
+              نحن متخصصون في تجهيزك لاجتياز امتحانات Goethe-Zertifikat، TestDaF،
+              و DTZ. نقدم اختبارات تجريبية أسبوعية وتغذية راجعة فردية.
+            </p>
+            <div>
+              <span class="feature-tag">نماذج رسمية</span>
+              <span class="feature-tag">تصحيح فوري</span>
+              <span class="feature-tag">استراتيجيات</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- خدمة 3: تدريب مهني & وظيفة -->
+    <section class="gradient-bg" style="padding: 0 0 2rem 0">
+      <div class="container">
+        <div class="service-block" data-aos="fade-up" data-aos-duration="800">
+          <div
+            class="block-image"
+            data-aos="zoom-in-right"
+            data-aos-delay="150"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=1769&q=80"
+              alt="فريق عمل ألماني"
+            />
+          </div>
+          <div class="block-content" data-aos="fade-right" data-aos-delay="200">
+            <div class="service-icon"><i class="fas fa-briefcase"></i></div>
+            <h3>تدريب مهني & وظيفة</h3>
+            <p>
+              نربطك بشركات تبحث عن متدربين (Ausbildung) وموظفين في مجالات
+              التمريض، تقنية المعلومات، الفنادق، والحرف. ندعمك في تحضير السيرة
+              الذاتية والمقابلات.
+            </p>
+            <div>
+              <span class="feature-tag">+15 شركة شريكة</span>
+              <span class="feature-tag">تدريب مدفوع</span>
+              <span class="feature-tag">عقود عمل</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- خدمة 4: تأشيرة & معاملات -->
+    <section class="gradient-bg" style="padding: 0 0 5rem 0">
+      <div class="container">
+        <div
+          class="service-block reverse"
+          data-aos="fade-up"
+          data-aos-duration="800"
+        >
+          <div class="block-image" data-aos="zoom-in-left" data-aos-delay="150">
+            <img
+              src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80"
+              alt="وثائق وتأشيرة"
+            />
+          </div>
+          <div class="block-content" data-aos="fade-left" data-aos-delay="200">
+            <div class="service-icon"><i class="fas fa-passport"></i></div>
+            <h3>تأشيرة & معاملات</h3>
+            <p>
+              فريقنا القانوني يساعدك في استكمال أوراق التأشيرة، تقديم الطلبات
+              للسفارة، معادلة الشهادات، ومرافقتك إلى دائرة الأجانب
+              (Ausländerbehörde).
+            </p>
+            <div>
+              <span class="feature-tag">تأشيرة دراسة</span>
+              <span class="feature-tag">لم الشمل</span>
+              <span class="feature-tag">تصديقات</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- قسم "من نحن" -->
+    <section id="about" class="about-section">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-text" data-aos="fade-left" data-aos-duration="900">
+            <h2>أكثر من مجرد معهد لغوي</h2>
+            <p style="font-size: 1.2rem">
+              منذ أكثر من 10 سنوات نساعد الأشخاص للوصول إلى ألمانيا. فريقنا مكون
+              من مدرسين natives، مستشارين معتمدين ومتدربين سابقين. نعرف تعقيدات
+              الدوائر الرسمية ونساعدك لتحقق أقصى فرصك.
+            </p>
+            <ul class="feature-list">
+              <li><i class="fas fa-check-circle"></i> دورات مهنية (B2/C1)</li>
+              <li>
+                <i class="fas fa-check-circle"></i> تدريب فردي على التقديم
+                للوظائف
+              </li>
+              <li><i class="fas fa-check-circle"></i> شراكة مع 20+ شركة</li>
+              <li>
+                <i class="fas fa-check-circle"></i> مرافقة إلى السفارة / دائرة
+                الأجانب
+              </li>
+            </ul>
+          </div>
+          <div
+            class="about-image"
+            data-aos="fade-right"
+            data-aos-duration="900"
+            data-aos-delay="100"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80"
+              alt="فريق النقاش"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- خطوات العملية -->
+    <section id="prozess" class="gradient-bg" style="padding: 5rem 0">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">
+          خريطة طريقك إلى ألمانيا
+        </h2>
+        <p class="section-sub" data-aos="fade-up" data-aos-delay="100">
+          من أول درس حتى بداية العمل – نبقى معك خطوة بخطوة.
+        </p>
+        <div class="process-steps">
+          <div class="step" data-aos="flip-up" data-aos-delay="0">
+            <div class="step-num">١</div>
+            <h3>تقييم</h3>
+            <p>اختبار مجاني ومقابلة شخصية</p>
+          </div>
+          <div class="step" data-aos="flip-up" data-aos-delay="100">
+            <div class="step-num">٢</div>
+            <h3>دورة لغة</h3>
+            <p>مكثفة أو مرنة مع تركيز على الامتحان</p>
+          </div>
+          <div class="step" data-aos="flip-up" data-aos-delay="200">
+            <div class="step-num">٣</div>
+            <h3>شهادة</h3>
+            <p>امتحان Goethe / Telc داخل المعهد</p>
+          </div>
+          <div class="step" data-aos="flip-up" data-aos-delay="300">
+            <div class="step-num">٤</div>
+            <h3>تأشيرة</h3>
+            <p>مساعدة في الطلبات والمواعيد</p>
+          </div>
+          <div class="step" data-aos="flip-up" data-aos-delay="400">
+            <div class="step-num">٥</div>
+            <h3>تدريب/وظيفة</h3>
+            <p>توظيف وتوقيع العقد</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- شهادة عميل -->
+    <section class="testimonial-block">
+      <div class="container testimonial-content">
+        <i
+          class="fas fa-quote-right"
+          style="font-size: 4rem; color: #64ffda; opacity: 0.4"
+          data-aos="fade-up"
+        ></i>
+        <div class="quote" data-aos="fade-up" data-aos-delay="100">
+          "بفضل LinguaBridge حصلت على شهادة B2 خلال ٨ أشهر ووجدت تدريباً مهنياً
+          في التمريض. الدعم في طلب التأشيرة كان لا يُقدر بثمن!"
+        </div>
+        <div class="author" data-aos="fade-up" data-aos-delay="200">
+          — لينا س، الآن متدربة في ميونيخ
+        </div>
+        <div style="margin-top: 3rem" data-aos="zoom-in" data-aos-delay="250">
+          <a
+            href="#kontakt"
+            class="btn-primary"
+            style="font-size: 1.4rem; padding: 1.2rem 3rem"
+            >ابدأ فحص فرصك في ألمانيا <i class="fas fa-rocket"></i
+          ></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- قسم الاتصال -->
+    <section id="kontakt" style="padding: 5rem 0; background: #0f2832">
+      <div class="container">
+        <div class="about-grid" style="align-items: start">
+          <div style="flex: 1" data-aos="fade-left">
+            <h2 class="section-title">هيا بنا نبدأ</h2>
+            <p class="section-sub">
+              احجز استشارة مجانية – عبر الإنترنت أو في مقرنا.
+            </p>
+            <div style="margin: 2rem 0">
+              <p>
+                <i
+                  class="fas fa-map-pin"
+                  style="color: #64ffda; width: 2rem"
+                ></i>
+                برلين، بوتسدامر شتراسه ٨٥
+              </p>
+              <p>
+                <i class="fas fa-phone-alt" style="color: #64ffda"></i> +49 30
+                1234 5678
+              </p>
+              <p>
+                <i class="fas fa-envelope" style="color: #64ffda"></i>
+                info@linguabridge.de
+              </p>
+            </div>
+          </div>
+          <div
+            style="
+              flex: 1;
+              background: rgba(20, 55, 70, 0.4);
+              border-radius: 50px;
+              padding: 2rem;
+              backdrop-filter: blur(4px);
+            "
+            data-aos="fade-right"
+            data-aos-delay="100"
+          >
+            <form>
+              <input
+                type="text"
+                placeholder="الاسم"
+                style="
+                  width: 100%;
+                  padding: 1rem;
+                  margin-bottom: 1rem;
+                  border-radius: 40px;
+                  border: none;
+                  background: #1b4858;
+                  color: white;
+                "
+              />
+              <input
+                type="email"
+                placeholder="البريد الإلكتروني"
+                style="
+                  width: 100%;
+                  padding: 1rem;
+                  margin-bottom: 1rem;
+                  border-radius: 40px;
+                  border: none;
+                  background: #1b4858;
+                  color: white;
+                "
+              />
+              <textarea
+                rows="4"
+                placeholder="رسالتك"
+                style="
+                  width: 100%;
+                  padding: 1rem;
+                  border-radius: 30px;
+                  border: none;
+                  background: #1b4858;
+                  color: white;
+                "
+              ></textarea>
+              <button class="btn-primary" style="width: 100%; margin-top: 1rem">
+                إرسال
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer>
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div
+            class="logo"
+            style="
+              font-size: 2rem;
+              background: linear-gradient(130deg, #64ffda, #48cae4);
+              -webkit-background-clip: text;
+              background-clip: text;
+              color: transparent;
+            "
+          >
+            LinguaBridge
+          </div>
+          <p>جسرك إلى التدريب والوظيفة في ألمانيا.</p>
+        </div>
+        <div class="footer-col">
+          <h4>الخدمات</h4>
+          <p>دورات لغة</p>
+          <p>تحضير امتحانات</p>
+          <p>تدريب مهني</p>
+          <p>خدمات التأشيرة</p>
+        </div>
+        <div class="footer-col">
+          <h4>قانوني</h4>
+          <p>بيانات النشر</p>
+          <p>سياسة الخصوصية</p>
+          <p>الشروط والأحكام</p>
+        </div>
+        <div class="footer-col">
+          <h4>تابعنا</h4>
+          <div class="social-icons">
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-linkedin"></i>
+            <i class="fab fa-youtube"></i>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>
+          © ٢٠٢٥ LinguaBridge – تعلم الألمانية والوصول للوظيفة. جميع الحقوق
+          محفوظة.
+        </p>
+      </div>
+    </footer>
+
+    <!-- تفعيل مكتبة AOS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 900,
+        once: false,
+        mirror: true,
+        offset: 100,
+      });
+    </script>
+  </body>
+</html>
