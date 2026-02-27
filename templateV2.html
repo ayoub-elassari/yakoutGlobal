@@ -1,0 +1,1210 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LinguaBridge – آفاق دراسية مهنية</title>
+    <!-- Tailwind (RTL) & Font Awesome -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <!-- Google Fonts (Tajawal) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Animate.css for additional animations -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <style>
+      * {
+        font-family: "Tajawal", sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        overflow-x: hidden;
+        background-color: #0f172a;
+      }
+      /* شريط التنقل الزجاجي */
+      .glass-nav {
+        background: rgba(15, 23, 42, 0.7);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+      .glass-nav a {
+        transition:
+          color 0.2s,
+          transform 0.2s;
+      }
+      .glass-nav a:hover {
+        color: #10b981;
+        transform: translateY(-2px);
+      }
+      /* القائمة المنسدلة (موبايل) */
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 400px;
+        height: 100vh;
+        background: rgba(15, 23, 42, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        z-index: 1001;
+        padding: 2rem;
+        transition: right 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+        overflow-y: auto;
+      }
+      .mobile-menu.open {
+        right: 0;
+      }
+      /* زر إغلاق X أبيض */
+      .close-btn {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        z-index: 1003;
+      }
+      .close-btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: scale(1.1) rotate(90deg);
+      }
+      .close-btn i {
+        color: white;
+        font-size: 1.5rem;
+      }
+      .menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s ease;
+      }
+      .menu-overlay.open {
+        opacity: 1;
+        visibility: visible;
+      }
+      /* زر الهامبورجر */
+      .hamburger-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 21px;
+        cursor: pointer;
+        z-index: 1002;
+        position: relative;
+      }
+      .hamburger-btn span {
+        width: 100%;
+        height: 3px;
+        background: white;
+        border-radius: 3px;
+        transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+      /* كل قسم يأخذ full viewport */
+      .full-section {
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        padding: 6rem 1rem 2rem;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      /* تأثير parallax خفيف عند التمرير */
+      .full-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: inherit;
+        background-attachment: fixed;
+        transform: scale(1.1);
+        filter: blur(2px);
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: -1;
+      }
+      .full-section:hover::before {
+        transform: scale(1.15);
+      }
+      .overlay-dark {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 1;
+        transition: opacity 0.5s ease;
+      }
+      .overlay-light {
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.7);
+        z-index: 1;
+        transition: opacity 0.5s ease;
+      }
+      .section-content {
+        position: relative;
+        z-index: 20;
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+        opacity: 0;
+        transform: translateY(50px);
+        transition:
+          opacity 1s cubic-bezier(0.4, 0, 0.2, 1),
+          transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .section-content.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .giant-title {
+        font-size: clamp(2.5rem, 10vw, 5rem);
+        font-weight: 900;
+        line-height: 1.2;
+        min-height: 1.5em;
+      }
+      /* أنيميشنات محسنة وأكثر سلاسة */
+      @keyframes smoothFloat {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+      @keyframes smoothPulse {
+        0% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
+        }
+        50% {
+          transform: scale(1.03);
+          box-shadow: 0 0 20px 10px rgba(16, 185, 129, 0.2);
+        }
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+        }
+      }
+      @keyframes smoothGlow {
+        0% {
+          text-shadow:
+            0 0 5px rgba(16, 185, 129, 0.3),
+            0 0 10px rgba(16, 185, 129, 0.2);
+        }
+        50% {
+          text-shadow:
+            0 0 20px rgba(16, 185, 129, 0.8),
+            0 0 30px rgba(16, 185, 129, 0.6),
+            0 0 40px rgba(16, 185, 129, 0.4);
+        }
+        100% {
+          text-shadow:
+            0 0 5px rgba(16, 185, 129, 0.3),
+            0 0 10px rgba(16, 185, 129, 0.2);
+        }
+      }
+      @keyframes smoothSlideInRight {
+        0% {
+          transform: translateX(100px);
+          opacity: 0;
+          filter: blur(5px);
+        }
+        100% {
+          transform: translateX(0);
+          opacity: 1;
+          filter: blur(0);
+        }
+      }
+      @keyframes smoothSlideInLeft {
+        0% {
+          transform: translateX(-100px);
+          opacity: 0;
+          filter: blur(5px);
+        }
+        100% {
+          transform: translateX(0);
+          opacity: 1;
+          filter: blur(0);
+        }
+      }
+      @keyframes smoothFadeInUp {
+        0% {
+          transform: translateY(50px);
+          opacity: 0;
+          filter: blur(5px);
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+          filter: blur(0);
+        }
+      }
+      @keyframes smoothRotateIn {
+        0% {
+          transform: rotate(-180deg) scale(0.5);
+          opacity: 0;
+          filter: blur(10px);
+        }
+        100% {
+          transform: rotate(0) scale(1);
+          opacity: 1;
+          filter: blur(0);
+        }
+      }
+      @keyframes smoothBounceIn {
+        0% {
+          transform: scale(0.3);
+          opacity: 0;
+          filter: blur(10px);
+        }
+        50% {
+          transform: scale(1.05);
+          opacity: 0.9;
+          filter: blur(2px);
+        }
+        70% {
+          transform: scale(0.95);
+          opacity: 1;
+          filter: blur(0);
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+          filter: blur(0);
+        }
+      }
+      @keyframes smoothZoomIn {
+        0% {
+          transform: scale(0.5);
+          opacity: 0;
+          filter: blur(10px);
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+          filter: blur(0);
+        }
+      }
+      @keyframes smoothSpin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes smoothShake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        10%,
+        30%,
+        50%,
+        70%,
+        90% {
+          transform: translateX(-5px);
+        }
+        20%,
+        40%,
+        60%,
+        80% {
+          transform: translateX(5px);
+        }
+      }
+      /* تطبيق التأثيرات المحسنة */
+      .smooth-float {
+        animation: smoothFloat 4s ease-in-out infinite;
+      }
+      .smooth-pulse {
+        animation: smoothPulse 3s ease-in-out infinite;
+      }
+      .smooth-glow {
+        animation: smoothGlow 3s ease-in-out infinite;
+      }
+      .smooth-spin {
+        animation: smoothSpin 15s linear infinite;
+      }
+      .smooth-shake:hover {
+        animation: smoothShake 0.5s ease-in-out;
+      }
+      /* تأثيرات الظهور للعناصر */
+      .smooth-slide-right {
+        animation: smoothSlideInRight 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+      .smooth-slide-left {
+        animation: smoothSlideInLeft 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+      .smooth-fade-up {
+        animation: smoothFadeInUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+      .smooth-rotate-in {
+        animation: smoothRotateIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+      .smooth-bounce-in {
+        animation: smoothBounceIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+      .smooth-zoom-in {
+        animation: smoothZoomIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+      /* تأخيرات متتالية للعناصر */
+      .delay-1 {
+        animation-delay: 0.2s;
+      }
+      .delay-2 {
+        animation-delay: 0.4s;
+      }
+      .delay-3 {
+        animation-delay: 0.6s;
+      }
+      .delay-4 {
+        animation-delay: 0.8s;
+      }
+      /* جسيمات عائمة محسنة */
+      .particle {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+        animation: smoothFloat 6s ease-in-out infinite;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 2rem;
+        padding: 2rem;
+        color: white;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3);
+        animation: smoothFadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        animation-delay: 0.3s;
+        opacity: 0;
+      }
+      .glass-card:hover {
+        transform: scale(1.05) translateY(-10px);
+        background: rgba(255, 255, 255, 0.25);
+        border-color: rgba(16, 185, 129, 0.5);
+        box-shadow: 0 30px 50px -15px rgba(16, 185, 129, 0.3);
+      }
+      .dark-text-card {
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: #f8fafc;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .dark-text-card:hover {
+        transform: scale(1.05) translateY(-5px);
+        background: rgba(0, 0, 0, 0.7);
+        border-color: rgba(16, 185, 129, 0.5);
+      }
+      .service-icon {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+        filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.2));
+        animation: smoothBounceIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+      .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 2rem;
+        font-weight: 500;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .mobile-nav-link {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .mobile-nav-link:hover {
+        background: rgba(16, 185, 129, 0.2);
+        transform: translateX(-10px);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- شريط التنقل (navigation bar) -->
+    <nav class="glass-nav">
+      <div
+        class="container mx-auto px-6 py-3 flex items-center justify-between"
+      >
+        <!-- الشعار -->
+        <div class="flex items-center gap-2">
+          <i
+            class="fas fa-globe-africa text-3xl text-emerald-400 smooth-spin"
+          ></i>
+          <span class="text-2xl font-bold text-white tracking-tight"
+            >Lingua<span class="text-emerald-400">Bridge</span></span
+          >
+        </div>
+
+        <!-- روابط التنقل للشاشات المتوسطة والكبيرة -->
+        <div class="hidden md:flex items-center gap-1 text-white">
+          <a href="#hero" class="nav-link hover:text-emerald-400 transition"
+            ><i class="fas fa-home"></i>الرئيسية</a
+          >
+          <a href="#germany" class="nav-link hover:text-amber-400 transition"
+            ><i class="fas fa-flag"></i>ألمانيا</a
+          >
+          <a href="#italy" class="nav-link hover:text-green-400 transition"
+            ><i class="fas fa-flag-checkered"></i>إيطاليا</a
+          >
+          <a href="#china" class="nav-link hover:text-red-400 transition"
+            ><i class="fas fa-dragon"></i>الصين</a
+          >
+          <a href="#russia" class="nav-link hover:text-indigo-400 transition"
+            ><i class="fas fa-snowman"></i>روسيا</a
+          >
+          <a href="#values" class="nav-link hover:text-emerald-400 transition"
+            ><i class="fas fa-star"></i>قيمنا</a
+          >
+          <a href="#contact" class="nav-link hover:text-emerald-400 transition"
+            ><i class="fas fa-phone-alt"></i>اتصل بنا</a
+          >
+        </div>
+
+        <!-- زر الهامبورجر للشاشات الصغيرة + واتساب مختصر -->
+        <div class="flex items-center gap-3">
+          <a
+            href="#contact"
+            class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-full text-sm font-semibold transition flex items-center gap-2 smooth-pulse"
+          >
+            <i class="fab fa-whatsapp"></i>
+            <span class="hidden sm:inline">تواصل</span>
+          </a>
+          <div
+            class="md:hidden hamburger-btn"
+            id="hamburgerBtn"
+            onclick="toggleMenu()"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- القائمة المنسدلة للموبايل مع زر X أبيض -->
+    <div class="mobile-menu" id="mobileMenu">
+      <!-- زر X أبيض للإغلاق -->
+      <div class="close-btn" onclick="toggleMenu()">
+        <i class="fas fa-times"></i>
+      </div>
+
+      <div class="flex flex-col gap-2 text-white mt-16">
+        <a href="#hero" class="mobile-nav-link" onclick="toggleMenu()"
+          ><i class="fas fa-home w-8"></i> الرئيسية</a
+        >
+        <a href="#germany" class="mobile-nav-link" onclick="toggleMenu()"
+          ><i class="fas fa-flag text-amber-400 w-8"></i> ألمانيا</a
+        >
+        <a href="#italy" class="mobile-nav-link" onclick="toggleMenu()"
+          ><i class="fas fa-flag-checkered text-green-400 w-8"></i> إيطاليا</a
+        >
+        <a href="#china" class="mobile-nav-link" onclick="toggleMenu()"
+          ><i class="fas fa-dragon text-red-400 w-8"></i> الصين</a
+        >
+        <a href="#russia" class="mobile-nav-link" onclick="toggleMenu()"
+          ><i class="fas fa-snowman text-indigo-400 w-8"></i> روسيا</a
+        >
+        <a href="#values" class="mobile-nav-link" onclick="toggleMenu()"
+          ><i class="fas fa-star text-yellow-400 w-8"></i> قيمنا</a
+        >
+        <a href="#contact" class="mobile-nav-link" onclick="toggleMenu()"
+          ><i class="fas fa-phone-alt text-emerald-400 w-8"></i> اتصل بنا</a
+        >
+      </div>
+    </div>
+
+    <!-- خلفية معتمة عند فتح القائمة -->
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+
+    <!-- قسم hero الرئيسي -->
+    <section
+      id="hero"
+      class="full-section"
+      style="
+        background-image:
+          linear-gradient(135deg, #0b2a34 0%, #1a5a4b 100%),
+          url(&quot;https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop&quot;);
+        background-blend-mode: overlay;
+      "
+    >
+      <div class="overlay-dark"></div>
+
+      <!-- جسيمات عائمة متعددة -->
+      <div
+        class="particle"
+        style="
+          width: 100px;
+          height: 100px;
+          top: 10%;
+          left: 5%;
+          animation-delay: 0s;
+        "
+      ></div>
+      <div
+        class="particle"
+        style="
+          width: 150px;
+          height: 150px;
+          bottom: 15%;
+          right: 8%;
+          animation-delay: 2s;
+        "
+      ></div>
+      <div
+        class="particle"
+        style="
+          width: 70px;
+          height: 70px;
+          top: 20%;
+          right: 15%;
+          animation-delay: 1s;
+        "
+      ></div>
+      <div
+        class="particle"
+        style="
+          width: 200px;
+          height: 200px;
+          bottom: 25%;
+          left: 10%;
+          animation-delay: 3s;
+        "
+      ></div>
+
+      <div class="section-content text-center text-white px-4" id="heroContent">
+        <!-- أيقونة الكرة الأرضية مع دوران بطيء -->
+        <div class="smooth-spin mb-6">
+          <i class="fas fa-globe-africa text-7xl text-emerald-300"></i>
+        </div>
+
+        <!-- العنوان الرئيسي - سيتم تعبئته عبر JavaScript -->
+        <h1 class="giant-title mb-4" id="heroTitle">
+          <span class="text-emerald-300" id="yakoutText"></span>
+          <span id="globalText"></span>
+        </h1>
+
+        <!-- النص الوصفي مع تأثير fade up محسن -->
+        <p
+          class="text-2xl md:text-3xl font-light max-w-3xl mx-auto leading-relaxed opacity-90 smooth-fade-up delay-1"
+          id="heroDescription"
+        >
+          آفاق دراسية ومهنية في أربع قارات — ألمانيا · إيطاليا · الصين · روسيا
+        </p>
+
+        <!-- أزرار مع تأثيرات حركية محسنة -->
+        <div class="mt-12 flex gap-4 justify-center" id="heroButtons">
+          <a
+            href="#germany"
+            class="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-4 px-10 rounded-full text-xl transition-all duration-500 shadow-2xl hover:scale-110 hover:shadow-emerald-500/50 smooth-pulse smooth-shake"
+          >
+            ابدأ الرحلة
+          </a>
+          <a
+            href="#contact"
+            class="bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white border border-white font-bold py-4 px-10 rounded-full text-xl transition-all duration-500 hover:scale-110 hover:shadow-white/50 smooth-shake"
+          >
+            تواصل معنا
+          </a>
+        </div>
+
+        <!-- مؤشر التمرير للأسفل مع نبض -->
+        <div
+          class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce"
+        >
+          <a href="#germany" class="text-white/60 hover:text-white transition">
+            <i class="fas fa-chevron-down text-3xl"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ألمانيا - صورة برلين -->
+    <section
+      id="germany"
+      class="full-section"
+      style="
+        background-image: url(&quot;https://images.unsplash.com/photo-1559925393-8c0f219476cd?q=80&w=2071&auto=format&fit=crop&quot;);
+        background-position: center;
+      "
+    >
+      <div class="overlay-dark"></div>
+      <div class="section-content text-white" id="germanyContent">
+        <div class="flex flex-col lg:flex-row items-center gap-16">
+          <div class="lg:w-1/2 smooth-slide-right">
+            <div class="flex items-center gap-4 mb-6">
+              <i class="fas fa-flag fa-3x text-amber-400 smooth-rotate-in"></i>
+              <h2 class="text-5xl font-black smooth-fade-up">
+                ألمانيا
+                <span class="text-amber-400 text-2xl"
+                  >(Ausbildung & وظائف)</span
+                >
+              </h2>
+            </div>
+            <p class="text-xl opacity-90 mb-8 smooth-fade-up delay-1">
+              دورات لغة معتمدة حتى B2، ترجمة رسمية، وإيجاد مكان تدريب مهني.
+              نرافقك في ملف الفيزا خطوة بخطوة.
+            </p>
+            <div class="grid md:grid-cols-3 gap-6 mt-10">
+              <div class="glass-card p-5 text-center delay-1">
+                <i class="fas fa-language service-icon text-amber-300"></i>
+                <h3 class="text-xl font-bold mb-2">لغة مكثفة</h3>
+                <p class="text-sm opacity-80">Goethe, TELC, ÖSD</p>
+              </div>
+              <div class="glass-card p-5 text-center delay-2">
+                <i class="fas fa-briefcase service-icon text-amber-300"></i>
+                <h3 class="text-xl font-bold mb-2">Ausbildung</h3>
+                <p class="text-sm opacity-80">تدريب مهني + عقود</p>
+              </div>
+              <div class="glass-card p-5 text-center delay-3">
+                <i
+                  class="fas fa-file-signature service-icon text-amber-300"
+                ></i>
+                <h3 class="text-xl font-bold mb-2">ترجمة وفيزا</h3>
+                <p class="text-sm opacity-80">مستندات رسمية</p>
+              </div>
+            </div>
+          </div>
+          <div class="lg:w-1/2 smooth-slide-left">
+            <img
+              src="https://images.unsplash.com/photo-1509475826633-fed577a2c71b?q=80&w=2071&auto=format&fit=crop"
+              class="rounded-3xl shadow-2xl border-4 border-amber-700/50 transition-all duration-700 hover:scale-110 hover:rotate-2 hover:shadow-2xl hover:shadow-amber-500/50"
+              alt="berlin"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- إيطاليا - صورة كولوسيوم -->
+    <section
+      id="italy"
+      class="full-section"
+      style="
+        background-image: url(&quot;https://images.unsplash.com/photo-1523906834658-6e24e2384f88?q=80&w=2083&auto=format&fit=crop&quot;);
+        background-position: center;
+      "
+    >
+      <div class="overlay-light"></div>
+      <div class="section-content text-gray-900" id="italyContent">
+        <div class="flex flex-col lg:flex-row items-center gap-16">
+          <div class="lg:w-1/2 order-2 lg:order-1 smooth-slide-left">
+            <img
+              src="https://images.unsplash.com/photo-1539037116277-4db20889f2d4?q=80&w=2070&auto=format&fit=crop"
+              class="rounded-3xl shadow-2xl border-4 border-green-600/50 transition-all duration-700 hover:scale-110 hover:-rotate-2 hover:shadow-2xl hover:shadow-green-500/50"
+              alt="italy"
+            />
+          </div>
+          <div class="lg:w-1/2 order-1 lg:order-2 smooth-slide-right">
+            <div class="flex items-center gap-4 mb-6">
+              <i
+                class="fas fa-flag-checkered fa-3x text-green-700 smooth-rotate-in"
+              ></i>
+              <h2 class="text-5xl font-black text-green-900 smooth-fade-up">
+                إيطاليا
+                <span class="text-green-700 text-2xl">(دراسة & تدريب)</span>
+              </h2>
+            </div>
+            <p class="text-xl text-gray-800 mb-8 smooth-fade-up delay-1">
+              قبول جامعي في الطب والهندسة والفنون. فريقنا في إيطاليا يتابع
+              إجراءات التأشيرة والإقامة. دورات لغة إيطالية للمبتدئين.
+            </p>
+            <div class="flex flex-wrap gap-4 mt-10">
+              <span
+                class="bg-green-700 text-white px-6 py-3 rounded-full text-lg font-bold shadow transition-all duration-500 hover:scale-110 hover:bg-green-600 smooth-pulse"
+                ><i class="fas fa-university ml-2"></i>قبول جامعي</span
+              >
+              <span
+                class="bg-green-700 text-white px-6 py-3 rounded-full text-lg font-bold shadow transition-all duration-500 hover:scale-110 hover:bg-green-600 smooth-pulse"
+                ><i class="fas fa-plane-arrival ml-2"></i>تأشيرة دراسة</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- الصين - صورة سور الصين -->
+    <section
+      id="china"
+      class="full-section"
+      style="
+        background-image: url(&quot;https://images.unsplash.com/photo-1508804052814-cd3ba865a116?q=80&w=2070&auto=format&fit=crop&quot;);
+        background-position: center;
+      "
+    >
+      <div class="overlay-dark"></div>
+      <div class="section-content text-white" id="chinaContent">
+        <div class="flex flex-col lg:flex-row items-center gap-16">
+          <div class="lg:w-1/2 smooth-slide-right">
+            <div class="flex items-center gap-4 mb-6">
+              <i class="fas fa-dragon fa-3x text-red-300 smooth-rotate-in"></i>
+              <h2 class="text-5xl font-black smooth-fade-up">
+                الصين
+                <span class="text-red-300 text-2xl">(الدراسة بالخارج)</span>
+              </h2>
+            </div>
+            <p class="text-xl opacity-90 mb-8 smooth-fade-up delay-1">
+              فرص في الطب والهندسة، منح حكومية جزئية. نرافقك في التقديم
+              للجامعات، ودورات HSK. فريق متكامل في بكين وشنغهاي.
+            </p>
+            <div class="flex flex-wrap gap-4 mt-10">
+              <span
+                class="bg-red-600 text-white px-6 py-3 rounded-full text-lg font-bold transition-all duration-500 hover:scale-110 hover:bg-red-500 smooth-pulse"
+                ><i class="fas fa-trophy ml-2"></i>منح دراسية</span
+              >
+              <span
+                class="bg-red-600 text-white px-6 py-3 rounded-full text-lg font-bold transition-all duration-500 hover:scale-110 hover:bg-red-500 smooth-pulse"
+                ><i class="fas fa-language ml-2"></i>دورات صينية</span
+              >
+            </div>
+          </div>
+          <div class="lg:w-1/2 smooth-slide-left">
+            <img
+              src="https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?q=80&w=2070&auto=format&fit=crop"
+              class="rounded-3xl shadow-2xl border-4 border-red-500/50 transition-all duration-700 hover:scale-110 hover:rotate-2 hover:shadow-2xl hover:shadow-red-500/50"
+              alt="china"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- روسيا - صورة الكرملين -->
+    <section
+      id="russia"
+      class="full-section"
+      style="
+        background-image: url(&quot;https://images.unsplash.com/photo-1513326738677-b964603b136d?q=80&w=2070&auto=format&fit=crop&quot;);
+        background-position: center;
+      "
+    >
+      <div class="overlay-dark"></div>
+      <div class="section-content text-white" id="russiaContent">
+        <div class="flex flex-col lg:flex-row items-center gap-16">
+          <div class="lg:w-1/2 order-2 lg:order-1 smooth-slide-left">
+            <img
+              src="https://images.unsplash.com/photo-1547937414-009abc449011?q=80&w=2070&auto=format&fit=crop"
+              class="rounded-3xl shadow-2xl border-4 border-indigo-400/50 transition-all duration-700 hover:scale-110 hover:-rotate-2 hover:shadow-2xl hover:shadow-indigo-500/50"
+              alt="russia"
+            />
+          </div>
+          <div class="lg:w-1/2 order-1 lg:order-2 smooth-slide-right">
+            <div class="flex items-center gap-4 mb-6">
+              <i
+                class="fas fa-snowman fa-3x text-indigo-300 smooth-rotate-in"
+              ></i>
+              <h2 class="text-5xl font-black smooth-fade-up">
+                روسيا
+                <span class="text-indigo-300 text-2xl"
+                  >(طب – هندسة – علوم)</span
+                >
+              </h2>
+            </div>
+            <p class="text-xl opacity-90 mb-8 smooth-fade-up delay-1">
+              جامعات حكومية بأسعار تنافسية، دعوة دراسية، استقبال في المطار.
+              تحضير لغوي (روسيا) وتأشيرة مضمونة.
+            </p>
+            <div class="grid md:grid-cols-2 gap-6 mt-10">
+              <div
+                class="dark-text-card p-5 text-center rounded-2xl transition-all duration-500 hover:scale-110 hover:border-indigo-400 smooth-pulse"
+              >
+                <i
+                  class="fas fa-file-contract text-3xl text-indigo-300 mb-3"
+                ></i>
+                <h4 class="font-bold">دعوة دراسية</h4>
+              </div>
+              <div
+                class="dark-text-card p-5 text-center rounded-2xl transition-all duration-500 hover:scale-110 hover:border-indigo-400 smooth-pulse"
+              >
+                <i
+                  class="fas fa-plane-arrival text-3xl text-indigo-300 mb-3"
+                ></i>
+                <h4 class="font-bold">استقبال بالمطار</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- قسم القيم + extra hours -->
+    <section
+      id="values"
+      class="full-section"
+      style="
+        background:
+          linear-gradient(145deg, #164d4a, #1d7a6b),
+          url(&quot;https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop&quot;);
+        background-blend-mode: overlay;
+      "
+    >
+      <div class="overlay-dark"></div>
+      <div class="section-content text-white text-center" id="valuesContent">
+        <h2 class="text-5xl font-black mb-6 smooth-bounce-in">قيمنا</h2>
+        <div class="flex flex-wrap justify-center gap-12 mb-16">
+          <div class="transition-all duration-500 hover:scale-110 smooth-float">
+            <div
+              class="bg-white/20 w-24 h-24 rounded-full flex items-center justify-center text-4xl mb-3 smooth-pulse"
+            >
+              <i class="fas fa-star"></i>
+            </div>
+            <span class="text-xl">التميز اللغوي</span>
+          </div>
+          <div
+            class="transition-all duration-500 hover:scale-110 smooth-float"
+            style="animation-delay: 0.3s"
+          >
+            <div
+              class="bg-white/20 w-24 h-24 rounded-full flex items-center justify-center text-4xl mb-3 smooth-pulse"
+              style="animation-delay: 0.3s"
+            >
+              <i class="fas fa-user-check"></i>
+            </div>
+            <span class="text-xl">متابعة فردية</span>
+          </div>
+          <div
+            class="transition-all duration-500 hover:scale-110 smooth-float"
+            style="animation-delay: 0.6s"
+          >
+            <div
+              class="bg-white/20 w-24 h-24 rounded-full flex items-center justify-center text-4xl mb-3 smooth-pulse"
+              style="animation-delay: 0.6s"
+            >
+              <i class="fas fa-handshake"></i>
+            </div>
+            <span class="text-xl">انفتاح ثقافي</span>
+          </div>
+        </div>
+        <div class="border-t border-white/30 pt-12">
+          <h3 class="text-4xl font-bold mb-6 smooth-fade-up">Extra Hours</h3>
+          <div class="flex flex-wrap gap-4 justify-center">
+            <span
+              class="bg-white/20 px-8 py-3 rounded-full text-2xl transition-all duration-500 hover:scale-110 hover:bg-white/30 smooth-float"
+              ><i class="fas fa-flag ml-2 text-amber-300"></i>ألمانية</span
+            >
+            <span
+              class="bg-white/20 px-8 py-3 rounded-full text-2xl transition-all duration-500 hover:scale-110 hover:bg-white/30 smooth-float"
+              style="animation-delay: 0.2s"
+              ><i class="fas fa-flag ml-2 text-blue-300"></i>إنجليزية</span
+            >
+            <span
+              class="bg-white/20 px-8 py-3 rounded-full text-2xl transition-all duration-500 hover:scale-110 hover:bg-white/30 smooth-float"
+              style="animation-delay: 0.4s"
+              ><i class="fas fa-flag ml-2 text-indigo-300"></i>فرنسية</span
+            >
+            <span
+              class="bg-white/20 px-8 py-3 rounded-full text-2xl transition-all duration-500 hover:scale-110 hover:bg-white/30 smooth-float"
+              style="animation-delay: 0.6s"
+              ><i class="fas fa-flag ml-2 text-red-300"></i>إسبانية</span
+            >
+            <span
+              class="bg-white/20 px-8 py-3 rounded-full text-2xl transition-all duration-500 hover:scale-110 hover:bg-white/30 smooth-float"
+              style="animation-delay: 0.8s"
+              ><i class="fas fa-dragon ml-2 text-red-400"></i>صينية</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- قسم الاتصال + الخريطة -->
+    <section
+      id="contact"
+      class="full-section"
+      style="
+        background:
+          linear-gradient(135deg, #2b4f4b, #0e2b27),
+          url(&quot;https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop&quot;);
+        background-blend-mode: overlay;
+      "
+    >
+      <div class="overlay-dark"></div>
+      <div class="section-content text-white" id="contactContent">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+          <div class="smooth-slide-right">
+            <h2 class="text-5xl font-black mb-6 smooth-fade-up">
+              تواصل مع LinguaBridge
+            </h2>
+            <p class="text-xl opacity-80 mb-8 smooth-fade-up delay-1">
+              نحن هنا للإجابة عن أسئلتك ومرافقتك في كل خطوة.
+            </p>
+            <div class="space-y-6">
+              <div
+                class="flex items-center gap-5 transition-all duration-500 hover:translate-x-4 hover:text-emerald-300 smooth-shake"
+              >
+                <i class="fas fa-map-pin text-4xl text-emerald-300"></i
+                ><span class="text-xl"
+                  >حي النخيل، الدار البيضاء 20250، المغرب</span
+                >
+              </div>
+              <div
+                class="flex items-center gap-5 transition-all duration-500 hover:translate-x-4 hover:text-emerald-300 smooth-shake"
+              >
+                <i class="fab fa-whatsapp text-4xl text-emerald-300"></i
+                ><span class="text-xl">+212 600-000000</span>
+              </div>
+              <div
+                class="flex items-center gap-5 transition-all duration-500 hover:translate-x-4 hover:text-emerald-300 smooth-shake"
+              >
+                <i class="fas fa-phone-alt text-4xl text-emerald-300"></i
+                ><span class="text-xl">0522-123456</span>
+              </div>
+              <div
+                class="flex items-center gap-5 transition-all duration-500 hover:translate-x-4 hover:text-emerald-300 smooth-shake"
+              >
+                <i class="fas fa-envelope text-4xl text-emerald-300"></i
+                ><span class="text-xl">contact@linguabridge.ma</span>
+              </div>
+            </div>
+            <div
+              class="mt-8 bg-white/10 p-5 rounded-3xl backdrop-blur-md transition-all duration-500 hover:scale-105 hover:bg-white/20"
+            >
+              <p class="mb-2 text-lg">إحداثيات الموقع:</p>
+              <div
+                onclick="copyCoordinates()"
+                class="cursor-pointer bg-white/20 p-3 rounded-xl flex items-center justify-between transition-all duration-500 hover:bg-white/30 hover:scale-105"
+              >
+                <span dir="ltr" class="font-mono text-lg"
+                  >33.5822528, -7.6290453</span
+                >
+                <i class="fas fa-copy text-emerald-300 text-xl"></i>
+              </div>
+              <a
+                href="https://www.google.com/maps/place/Palmier,+Casablanca/@33.5822528,-7.6290453,17z"
+                target="_blank"
+                class="block mt-4 bg-emerald-600 text-white text-center py-3 rounded-xl font-bold text-lg transition-all duration-500 hover:bg-emerald-700 hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/50"
+                >فتح في خرائط جوجل</a
+              >
+            </div>
+          </div>
+          <!-- نموذج بسيط -->
+          <div
+            class="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 smooth-slide-left transition-all duration-500 hover:scale-105 hover:bg-white/20"
+          >
+            <h3 class="text-3xl font-bold mb-6">أرسل استفسارك</h3>
+            <form>
+              <input
+                type="text"
+                placeholder="الاسم الكامل"
+                class="w-full p-4 mb-4 bg-white/20 rounded-xl text-white placeholder-white/70 border border-white/30 transition-all duration-500 focus:scale-105 focus:bg-white/30 focus:border-emerald-400"
+              />
+              <input
+                type="email"
+                placeholder="البريد الإلكتروني"
+                class="w-full p-4 mb-4 bg-white/20 rounded-xl text-white placeholder-white/70 border border-white/30 transition-all duration-500 focus:scale-105 focus:bg-white/30 focus:border-emerald-400"
+              />
+              <input
+                type="tel"
+                placeholder="رقم الهاتف"
+                class="w-full p-4 mb-4 bg-white/20 rounded-xl text-white placeholder-white/70 border border-white/30 transition-all duration-500 focus:scale-105 focus:bg-white/30 focus:border-emerald-400"
+              />
+              <select
+                class="w-full p-4 mb-4 bg-white/20 rounded-xl text-white border border-white/30 transition-all duration-500 focus:scale-105 focus:bg-white/30 focus:border-emerald-400"
+              >
+                <option class="bg-gray-800">ألمانيا</option>
+                <option class="bg-gray-800">إيطاليا</option>
+                <option class="bg-gray-800">الصين</option>
+                <option class="bg-gray-800">روسيا</option>
+              </select>
+              <textarea
+                rows="3"
+                placeholder="رسالتك"
+                class="w-full p-4 mb-6 bg-white/20 rounded-xl text-white placeholder-white/70 border border-white/30 transition-all duration-500 focus:scale-105 focus:bg-white/30 focus:border-emerald-400"
+              ></textarea>
+              <button
+                class="w-full bg-emerald-500 hover:bg-emerald-600 py-4 rounded-xl text-xl font-bold transition-all duration-500 hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/50"
+              >
+                إرسال <i class="fas fa-paper-plane mr-2"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer بسيط -->
+    <footer class="bg-gray-950 text-gray-400 py-6 text-center">
+      <div class="container mx-auto">
+        © 2025 LinguaBridge – بناء جسور نحو النجاح في ألمانيا، إيطاليا، الصين،
+        روسيا.
+      </div>
+    </footer>
+
+    <!-- واتساب عائم -->
+    <a
+      href="https://wa.me/212600000000"
+      target="_blank"
+      class="fixed bottom-6 left-6 bg-green-600 text-white p-5 rounded-full shadow-2xl transition-all duration-500 z-50 flex items-center gap-2 text-xl hover:scale-110 hover:bg-green-700 smooth-pulse"
+    >
+      <i class="fab fa-whatsapp text-3xl"></i
+      ><span class="hidden sm:inline">تواصل واتساب</span>
+    </a>
+
+    <script>
+      // كشف العناصر عند التمرير
+      const sections = document.querySelectorAll(".section-content");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.3, rootMargin: "0px" },
+      );
+
+      sections.forEach((section) => observer.observe(section));
+
+      // دالة نسخ الإحداثيات
+      function copyCoordinates() {
+        const coords = "33.5822528, -7.6290453";
+        if (navigator.clipboard?.writeText) {
+          navigator.clipboard
+            .writeText(coords)
+            .then(() => alert("✅ تم نسخ الإحداثيات: " + coords));
+        } else {
+          prompt("انسخ الإحداثيات:", coords);
+        }
+      }
+
+      // إظهار أول قسم فوراً وبدء تأثير الكتابة
+      window.addEventListener("load", () => {
+        document.getElementById("heroContent").classList.add("visible");
+        startTypingEffect();
+      });
+
+      // تأثير الكتابة
+      function startTypingEffect() {
+        const yakoutElement = document.getElementById("yakoutText");
+        const globalElement = document.getElementById("globalText");
+
+        const yakoutText = "Lingua";
+        const globalText = "Bridge";
+
+        yakoutElement.textContent = "";
+        globalElement.textContent = "";
+
+        let i = 0;
+        let j = 0;
+
+        const typeYakout = setInterval(() => {
+          if (i < yakoutText.length) {
+            yakoutElement.textContent += yakoutText.charAt(i);
+            i++;
+          } else {
+            clearInterval(typeYakout);
+
+            const typeGlobal = setInterval(() => {
+              if (j < globalText.length) {
+                globalElement.textContent += globalText.charAt(j);
+                j++;
+              } else {
+                clearInterval(typeGlobal);
+
+                setTimeout(() => {
+                  yakoutElement.classList.add("smooth-glow");
+                  globalElement.classList.add("smooth-glow");
+                }, 500);
+              }
+            }, 150);
+          }
+        }, 150);
+      }
+
+      // تغيير شفافية النافبار عند التمرير
+      window.addEventListener("scroll", function () {
+        const nav = document.querySelector(".glass-nav");
+        if (window.scrollY > 100) {
+          nav.style.background = "rgba(15, 23, 42, 0.9)";
+        } else {
+          nav.style.background = "rgba(15, 23, 42, 0.7)";
+        }
+      });
+
+      // دوال قائمة الهامبورجر
+      function toggleMenu() {
+        const menu = document.getElementById("mobileMenu");
+        const overlay = document.getElementById("menuOverlay");
+        const hamburger = document.getElementById("hamburgerBtn");
+
+        menu.classList.toggle("open");
+        overlay.classList.toggle("open");
+        hamburger.classList.toggle("open");
+
+        if (menu.classList.contains("open")) {
+          document.body.style.overflow = "hidden";
+        } else {
+          document.body.style.overflow = "";
+        }
+      }
+
+      document.querySelectorAll(".mobile-nav-link").forEach((link) => {
+        link.addEventListener("click", () => {
+          toggleMenu();
+        });
+      });
+    </script>
+  </body>
+</html>
